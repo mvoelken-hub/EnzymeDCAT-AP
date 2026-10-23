@@ -1,0 +1,77 @@
+---
+id: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP
+name: EnzymeDCAT-AP
+title: EnzymeDCAT-AP
+description: |-
+  This is an extension of the DCAT-AP Plus LinkML schema to provide biocatalytic specific metadata for a dataset.
+license: MIT
+see_also:
+  - https://mvoelken-hub.github.io/EnzymeDCAT-AP
+
+prefixes:
+  enzymedcat_ap: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/vocab/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: http://www.example.org/rdf#
+default_prefix: enzymedcat_ap
+default_range: string
+
+imports:
+  - linkml:types
+  - ../chem_dcat_ap
+
+classes:
+  EnzymeMLDocument:
+      is_a: Dataset
+      class_uri: 
+      description: >-
+        A Dataset that represents a converted EnzymeML document: a container
+        for a biocatalytic experiment's vessels, species, reactions,
+        measurements and kinetic model, expressed as STRENDA-Biocatalysis
+        metadata.
+      slot_usage:
+        was_generated_by:
+          description: >-
+            The BiocatalyticExperiment that this EnzymeML document describes.
+          range: BiocatalyticExperiment
+          required: true
+          multivalued: true
+          inlined_as_list: true
+        is_about_activity:
+          description: >-
+            The BiocatalyticReaction(s) this EnzymeML document is about. An
+            EnzymeML document may hold more than one reaction, therefore
+            multivalued (unlike the single-valued base in
+            ReactionMonitoringDataset).
+          range: BiocatalyticReaction
+          multivalued: true
+          inlined_as_list: true
+          recommended: true
+        creator:
+          description: >-
+            The author(s)/contributor(s) of the EnzymeML document. Not
+            required: many real-world EnzymeML documents carry no creator
+            metadata, and the converter cannot fabricate it.
+          range: EnzymeMLCreator
+          recommended: true
+          multivalued: true
+          inlined_as_list: true
+
+  EnzymeMLCreator:
+    is_a: Agent
+    class_uri: schema:person
+    description: >-
+      An author or contributor of an EnzymeML document, with the
+      given/family name split and email address EnzymeML captures.
+    slots:
+      - given_name
+      - family_name
+      - mail
+
+slots:
+  
+
+enums:
+  

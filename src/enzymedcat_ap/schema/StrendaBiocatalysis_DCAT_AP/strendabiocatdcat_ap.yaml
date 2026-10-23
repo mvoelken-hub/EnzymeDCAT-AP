@@ -1,0 +1,32 @@
+---
+id: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP
+name: EnzymeDCAT-AP
+title: EnzymeDCAT-AP
+description: |-
+  This is an extension of the DCAT-AP Plus LinkML schema to provide biocatalytic specific metadata for a dataset.
+license: MIT
+see_also:
+  - https://mvoelken-hub.github.io/EnzymeDCAT-AP
+
+prefixes:
+  enzymedcat_ap: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/vocab/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: http://www.example.org/rdf#
+default_prefix: enzymedcat_ap
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  
+
+slots:
+  
+
+enums:
+  

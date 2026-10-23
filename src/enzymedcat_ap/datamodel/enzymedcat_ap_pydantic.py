@@ -71,7 +71,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'enzymedcat_ap',
      'description': 'This is an extension of the DCAT-AP Plus LinkML schema to '
                     'provide biocatalytic specific metadata for a dataset.',
      'id': 'https://w3id.org/mvoelken-hub/EnzymeDCAT-AP',
-     'imports': ['linkml:types'],
+     'imports': ['linkml:types', 'EnzymeML_DCAT_AP/enzymemldcat_ap'],
      'license': 'MIT',
      'name': 'EnzymeDCAT-AP',
      'prefixes': {'PATO': {'prefix_prefix': 'PATO',
