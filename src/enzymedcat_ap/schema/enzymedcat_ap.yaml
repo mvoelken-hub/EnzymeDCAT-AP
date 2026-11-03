@@ -15,6 +15,10 @@ prefixes:
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
   example: http://www.example.org/rdf#
+  # Declared by DCAT-AP+ only in its own file. LinkML freezes its namespace map while DCAT-AP+ is still being
+  # loaded, so without this line elements without a URI get the invalid IRIs dcatap_plus:... and gen-shacl
+  # falls back to a canonicalisation that does not finish.
+  dcatap_plus: https://w3id.org/nfdi-de/dcat-ap-plus/
 
 default_prefix: enzymedcat_ap
 default_range: string
