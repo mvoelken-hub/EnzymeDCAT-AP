@@ -1,9 +1,9 @@
 ---
-id: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP
-name: EnzymeDCAT-AP
-title: EnzymeDCAT-AP
+id: https://w3id.org/mvoelken-hub/EnzymeDCAT-AP/strenda
+name: STRENDA-Biocatalysis-DCAT-AP
+title: STRENDA Biocatalysis DCAT-AP Profile
 description: |-
-  This is an extension of the DCAT-AP Plus LinkML schema to provide biocatalytic specific metadata for a dataset.
+  This is the STRENDA Biocatalysis profile of EnzymeDCAT-AP, an extension of the DCAT-AP Plus LinkML schema to provide biocatalytic specific metadata for a dataset.
 license: MIT
 see_also:
   - https://mvoelken-hub.github.io/EnzymeDCAT-AP
