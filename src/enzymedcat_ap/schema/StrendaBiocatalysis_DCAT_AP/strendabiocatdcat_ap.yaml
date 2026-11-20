@@ -15,18 +15,1280 @@ prefixes:
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
   example: http://www.example.org/rdf#
+  AFE: http://purl.allotrope.org/ontologies/equipment#AFE_ 
 default_prefix: enzymedcat_ap
 default_range: string
 
 imports:
   - linkml:types
+  - ../chem_dcat_ap
+
 
 classes:
 
-  
+  # Biocatalyst
+  BiocatalystPurchased:
+    is_a: #todo Marc
+    class_uri: # No results!
+    description: "Important information to characterize the biocatalyst and determine its origin.Biocatalyst self-produced"
+    slots:
+      - has_name
+      - has_ec_number
+      - has_molecular_weight
+      - has_molecular_weight_unit
+      - has_catalyzed_reaction
+      - has_sequence_amino_acid
+      - has_sequence_DNA
+      - has_origin_organism
+      - has_supplier
+      - has_production_organism
+      - has_posttranslational_modification
+      - has_purity
+      - has_purity_specification
+      - has_formulation
+  BiocatalystSelfProduced:
+    is_a: #todo Marc
+    class_uri:
+    description: "Important information to characterize the biocatalyst and to describe it clearly."
+    slots:
+      - has_name
+      - has_ec_number
+      - has_molecular_weight
+      - has_molecular_weight_unit
+      - has_catalyzed_reaction
+      - has_sequence_amino_acid
+      - has_sequence_DNA
+      - has_sequence_plasmid
+      - has_plasmid_specifications
+      - has_origin_organism
+      - has_production_organism
+      - has_posttranslational_modification
+      - has_purity
+      - has_purity_specification
+      - has_purification_method
+      - has_formulation
+      - has_special_treatment
+  CellFreeProduction:
+    is_a: #todo Marc
+    class_uri:
+    description: "Cell-free enzyme production or gene expression refers to a process where the synthesis of the biocatalyst occurs outside of living cells. This technique involves extracting cellular components, such as ribosomes, DNA, RNA, and other necessary cellular machinery, and using them in a controlled environment (usually in vitro) to produce proteins or enzymes. For further information see, e.g. Khambhati _et al._1."
+    slots:
+      - has_source_of_cellfree_extract
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_special_treatment
+  CrudeCellExtract:
+    is_a: #todo Marc
+    class_uri:
+    description: "Whole cell biocatalyst"
+    slots:
+      - has_cell_disruption_process
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_special_treatment
+  Immobilised:
+    is_a: #todo Marc
+    class_uri:
+    description: ""
+    slots:
+      - has_biocatalyst
+      - has_immobilisation_chemistry
+      - has_carrier_material
+      - has_linkers
+      - has_immobilisation_method
+      - has_purification_method
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_special_treatment
+  PurifiedBiocatalyst:
+    is_a: #todo Marc
+    class_uri:
+    description: "The soluble enzyme refers to purified enzyme.Crude cell extract"
+    slots:
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_activity
+      - has_activity_unit
+      - has_activity_determination_method
+      - has_formulation
+      - has_special_treatment
+  SecretedEnzyme:
+    is_a: #todo Marc
+    class_uri:
+    description: "Cell-free-production"
+    slots:
+      - has_separation_method
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_special_treatment
+  StorageConditions:
+    is_a: #todo Marc
+    class_uri:
+    description: ""
+    slots:
+      - has_temperature
+      - has_temperature_unit
+      - has_storage_start
+      - has_additives
+      - has_drying_method
+      - has_special_treatment
+  WholeCellBiocatalyst:
+    is_a: #todo Marc
+    class_uri:
+    description: "Secreted enzyme"
+    slots:
+      - has_harvesting_method
+      - has_concentration
+      - has_concentration_unit
+      - has_concentration_determination_method
+      - has_formulation
+      - has_special_treatment
 
-slots:
+  # Components
+  Components:
+    is_a: #todo Marc
+    class_uri:
+    description: "Each component present in the planned reaction must be defined."
+    slots:
+      - has_name
+      - has_smiles
+      - has_persistent_identifier_PID
+      - has_concentration
+      - has_concentration_unit
+      - has_supplier
+      - has_purity
+      - has_formulation
+      - has_solubility_limit
+      - has_solubility_limit_unit
+  ComponentsStorageConditions:
+    is_a: #todo Marc
+    class_uri:
+    description: ""
+    slots:
+      - has_temperature
+      - has_temperature_unit
+      - has_storage_start
+      - has_additives
+      - has_special_treatment
+
+  # Operation Mode
+  Batch:
+    is_a: #todo Marc
+    class_uri:
+    description: "The batch operation mode represents a fundamental approach in biocatalysis, where all reaction components are mixed simultaneously within a closed system, and the reaction proceeds until a predetermined endpoint is reached. This mode is easy to control and well-suited for producing small batches of products."
+    slots:
+      - has_reactor_type
+  CombinatorialMode:
+    is_a: #todo Marc
+    class_uri:
+    description: "A combinatorial mode does not clearly fit into any of the aforementioned subcategories and thus represents a mixture of operation modes. This kind of experiment design could be used to systematically explore various reaction conditions or components in a combined manner. This approach allows the exploration of multiple options, such as varying substrate concentrations, catalysts, or reaction conditions. The goal is to identify the optimal conditions or combinations that most efficiently facilitate desired reactions in biocatalysis."
+    slots:
+      - has_reactor_type
+  Continuous:
+    is_a: #todo Marc
+    class_uri:
+    description: "In the continuous operation mode, the reaction operates continuously with substrates continuously supplied and products continuously removed. This mode enables uniform product formation and is particularly suitable for large-scale production."
+    slots:
+      - has_reactor_type
+  FedBatch:
+    is_a: #todo Marc
+    class_uri:
+    description: "In the fed-batch operation mode, additional compounds (e.g., substrates, acid/base for pH regulation, etc.) are gradually added during the reaction to control reaction conditions or enhance product formation. This mode allows for better control of the reaction progress and can increase productivity."
+    slots:
+      - has_reactor_type
+
+  # Reaction Conditions
+  DynamicTemperature_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "If there is a temperature gradient or different temperatures are measured in the system, these must be described as well as possible."
+    slots:
+      - has_temperature_beginning
+      - has_temperature_after_event
+      - has_event_description
+      - has_temperature_at_XY
+      - has_time_at_XY
+      - has_time_unit
+      - has_temperature_unit
+      - has_temperature_gradient_beginning
+      - has_temperature_gradient_end
+      - has_gradient_length
+      - has_gradient_length_unit
+      - has_measurement_points
+      - has_special_treatment
+  DynamicpH_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "If there is a pH gradient or different pHs are measured in the system, these must be described as detailed as possible. Depending on the buffer chosen, a temperature shift may also result in a pH shift."
+    slots:
+      - has_pH_beginning
+      - has_pH_after_event
+      - has_event_description
+      - has_pH_at_XY
+      - has_time_at_XY
+      - has_time_unit
+      - has_detected_when
+      - has_detected_how
+      - has_temperature
+      - has_temperature_unit
+      - has_calibration_pH_electrode
+      - has_pH_gradient_beginning
+      - has_pH_gradient_end
+      - has_gradient_length
+      - has_gradient_length_unit
+      - has_measurement_points
+      - has_special_treatment
+  EventBasedTemperatureShift_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "If the temperature is changed during the course of the reaction or there is an event-based change, this must be documented precisely."
+    slots:
+      - has_temperature_unit
+      - has_temperature_beginning
+      - has_temperature_after_event
+      - has_event_description
+      - has_temperature_at_XY
+      - has_time_at_XY
+      - has_time_unit
+      - has_special_treatment
+  EventBasedpHShift_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "If the pH is changed during the course of the reaction or there is an event-based change, this must be documented precisely. Depending on the buffer chosen, a temperature shift may also result in a pH shift."
+    slots:
+      - has_pH_beginning
+      - has_pH_after_event
+      - has_event_description
+      - has_pH_at_XY
+      - has_time_at_XY
+      - has_time_unit
+      - has_detected_when
+      - has_detected_how
+      - has_temperature
+      - has_temperature_unit
+      - has_calibration_pH_electrode
+      - has_special_treatment
+  GasPhase_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "Definition of the gas phase used in the reaction. If a gas mixture is involved, this must be taken into account."
+    slots:
+      - has_gas_type
+      - has_gas_amount
+      - has_gas_unit
+  GasPhase_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "Definition of the gas phase used in the reaction. If a gas mixture is involved, this must be taken into account."
+    slots:
+      - has_gas_type
+      - has_gas_amount
+      - has_gas_unit
+  LiquidPhase_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "If more then one liquid phase exists the metadata has to be recorded according to the number of liquid phases.Solid phase"
+    slots:
+      - has_liquid_type
+      - has_liquid_amount
+      - has_liquid_unit
+  LiquidPhase_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "If more then one liquid phase exists the metadata has to be recorded according to the number of liquid phases.Solid phase"
+    slots:
+      - has_liquid_type
+      - has_liquid_amount
+      - has_liquid_unit
+  MonoliquidSystemDescription_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "To describe a monoliquid system, precise information about the solvent used and the applied system must be provided."
+    slots:
+      - has_solvent_description
+      - has_ionic_strength
+      - has_ionic_strength_unit
+      - has_further_additives
+      - has_Flow_rate
+      - has_Flow_rate_unit
+      - has_special_treatment
+  MonoliquidSystemDescription_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "To describe a monoliquid system, precise information about the solvent (mixture) used and the applied reaction system must be provided."
+    slots:
+      - has_solvent_description
+      - has_ionic_strength
+      - has_ionic_strength_unit
+      - has_further_additives
+      - has_special_treatment
+  MultiphasicSystemDescription_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "To describe a multiphasic system, precise information about the phases used and the applied system must be provided."
+    slots:
+      - has_phases_number
+      - has_Flow_rate
+      - has_Flow_rate_unit
+      - has_special_treatment
+  MultiphasicSystemDescription_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "To describe a multiphasic system, precise information about the phases used and the applied system must be provided."
+    slots:
+      - has_phases_number
+      - has_special_treatment
+  SolidPhase_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "Definition of the solid phase used in the reaction.Gas phase"
+    slots:
+      - has_solid_type
+      - has_solid_amount
+      - has_solid_unit
+  SolidPhase_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "Definition of the solid phase used in the reaction.Gas phase"
+    slots:
+      - has_solid_type
+      - has_solid_amount
+      - has_solid_unit
+  TemperatureConstant_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "The temperature, if constant, must be clearly defined.Dynamic temperature"
+    slots:
+      - has_temperature
+      - has_temperature_unit
+      - has_special_treatment
+  TemperatureConstant_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "The temperature, if constant, must be clearly defined.Event-based temperature shift"
+    slots:
+      - has_temperature
+      - has_temperature_unit
+      - has_special_treatment
+  pHConstant_TFCR:
+    is_a: #todo Marc
+    class_uri:
+    description: "Information about the pH value in the system, if the pH is constant over the course of the reaction.Dynamic pH"
+    slots:
+      - has_pH_value
+      - has_detected_when
+      - has_detected_how
+      - has_temperature
+      - has_temperature_unit
+      - has_calibration_pH_electrode
+      - has_special_treatment
+  pHConstant_WMRS:
+    is_a: #todo Marc
+    class_uri:
+    description: "Information about the pH value in the system, if the pH is constant over the course of the reaction.Event-based pH shift"
+    slots:
+      - has_pH_value
+      - has_detected_when
+      - has_detected_how
+      - has_temperature
+      - has_temperature_unit
+      - has_calibration_pH_electrode
+      - has_special_treatment
+
+  # Results
+  ActivityAndInitialReactionRate:
+    is_a: #todo Marc
+    class_uri:
+    description: ""
+    slots:
+      - has_specific_activity
+      - has_specific_activity_unit
+      - has_initial_reaction_rate
+      - has_initial_reaction_rate_unit
+      - has_special_treatment
+  KineticParameters:
+    is_a: #todo Marc
+    class_uri:
+    description: "These parameters serve as benchmarks for understanding enzyme kinetics. The Km and kcat value is determined by all substrates involved in the reaction and not just one. Therefore, the concentrations of all substrates must be varied and the Km and kcat values calculated to obtain a common value instead of apparent values. For a comprehensive report around the technical key data of the kinetic parameters, see literature for further information, e.g. Pesci _et al._1, Bisswanger 2 ."
+    slots:
+      - has_michaelis_constant
+      - has_michaelis_constant_unit
+      - has_maximum_reaction_rate
+      - has_maximum_reaction_rate_unit
+      - has_turnover_number
+      - has_turnover_number_unit
+      - has_catalytic_efficiency
+      - has_catalytic_efficiency_unit
+      - has_dissociation_constant
+      - has_dissociation_constant_unit
+      - has_inhibition_type
+      - has_inhibition_constant
+      - has_inhibition_constant_unit
+      - has_hill_coefficient
+      - has_enzyme_stability
+      - has_special_treatment
+  SelectivityAndSpecificity:
+    is_a: #todo Marc
+    class_uri:
+    description: "These parameters directly assess a catalyst's precision in converting specific substrates to desired products. For a comprehensive report around the technical key data of the selectivity and specificity, see literature for further information, e.g. Faber4, Liese _et al._3, Schurig5."
+    slots:
+      - has_stereoselectivity
+      - has_enantioselectivity
+      - has_enantiomeric_excess
+      - has_enantiomeric_excess_unit
+      - has_diastereomeric_excess
+      - has_diasteriomeric_excess_unit
+      - has_isomeric_content
+      - has_isomeric_content_unit
+      - has_chemoselectivity
+      - has_regioselectivity
+      - has_special_treatment
+  ThermodynamicParameters:
+    is_a: #todo Marc
+    class_uri:
+    description: "Understanding the energy dynamics and spontaneity of reactions through thermodynamic parameters is essential for efficient biocatalysis. For a comprehensive report around the technical key data of the kinetic parameters, see literature for further information, e.g. Heintz6."
+    slots:
+      - has_gibbs_free_energy_change
+      - has_enthalpy_change
+      - has_special_treatment
+  YieldAndConversion:
+    is_a: #todo Marc
+    class_uri:
+    description: "These metrics are vital for evaluating the success of a process, optimizing reaction conditions, and ensuring the production of high-quality products in biocatalytic applications. For a comprehensive report around the technical key data of yield and conversion, see literature for further information, e.g. Lies _et al._3."
+    slots:
+      - has_c_yield
+      - has_yield_unit
+      - has_space_time_yield
+      - has_space_time_yield_unit
+      - has_conversion
+      - has_conversion_unit
+      - has_special_treatment
+
+  # Sampling
+  SamplePreprocessing:
+    is_a: #todo Marc
+    class_uri:
+    description: "Sample preprocessing involves the necessary steps taken to prepare and treat collected samples before analysis or further experimentation."
+    slots:
+      - has_quenching_method
+      - has_quenching_ratio
+      - has_treatment_procedure
+      - has_special_treatment
+  SamplingDescription:
+    is_a: #todo Marc
+    class_uri:
+    description: "Information about the sampling process, used during the experiment. In some experiments no sampling is taking place at all, for example, if an experiment is monitored via a photospectrometer in a 96-well plate over time."
+    slots:
+      - has_volume_per_sample
+      - has_volume_per_sample_unit
+      - has_mixing_during_sampling
+      - has_vessel_opened_for_sampling
+      - has_gas_phase
+      - has_time
+  SamplingFromHeterogeneousReactionSolutions:
+    is_a: #todo Marc
+    class_uri:
+    description: "Sample preprocessing"
+    slots:
+      - has_phase
+      - has_biocatalyst_in_phase
+      - has_special_treatment
   
+  # Vessels and Mixing
+  LiquidOrGasImpelledMixing:
+    is_a: #todo Marc
+    class_uri:
+    description: "Detailed information about the mixing mode used, whether it involves liquid or gas impelled mixing, is essential for ensuring the reproducibility and understanding of enzymatic reactions."
+    slots:
+      - has_volume_of_liquid_solid_phase
+      - has_residence_time
+      - has_residence_time_unit
+      - has_reynolds_number
+      - has_passive_mixing
+      - has_active_T_or_Y_mixer
+      - has_pulsing
+      - has_special_treatment
+  MechanicallyImpelledMixing:
+    is_a: #todo Marc
+    class_uri:
+    description: "When utilizing mechanically impelled mixing in enzymatic reactions, it is essential to provide information about the mixing method and related parameters.Liquid or gas impelled mixing"
+    slots:
+      - has_stirring_type
+      - has_stirrer_material
+      - has_supplier
+      - has_number_of_stirrers
+      - has_distance_between_stirrers
+      - has_distance_between_stirrers_unit
+      - has_stirrer_blade_pitch_angle
+      - has_number_of_stirrer_blades
+      - has_stirrer_blade_size
+      - has_stirrer_blade_size_unit
+      - has_stirrer_geometry
+      - has_stirrer_speed
+      - has_speed_unit
+      - has_height_of_stirrer_above_vessel_base
+      - has_height_of_stirrer_above_vessel_base_unit
+      - has_power_per_volume
+      - has_power_per_volume_unit
+      - has_stir_bar_size
+      - has_stir_bar_size_unit
+      - has_stir_bar_shape
+      - has_special_treatment
+  Plate:
+    is_a: #todo Marc
+    class_uri:
+    description: "It's crucial to provide detailed information about the plate type, material, well configuration, and other relevant specifications to ensure reproducibility and accuracy of the experimental setup.Stirred Tank Reactor"
+    slots:
+      - has_plate_type
+      - has_plate_material
+      - has_number_of_wells
+      - has_well_shape
+      - has_well_volume
+      - has_well_arrangement
+      - has_supplier
+      - has_lot_number
+      - has_sealing_method
+      - has_sealing_material
+      - has_special_treatment
+  Shaking:
+    is_a: #todo Marc
+    class_uri:
+    description: "Shaking is an essential method for ensuring uniform mixing and, consequently, recording relevant metadata is crucial for maintaining consistent reaction conditions.Mechanically impelled mixing (stirring)"
+    slots:
+      - has_shaking_type
+      - has_deflection
+      - has_deflection_unit
+      - has_speed
+      - has_speed_unit
+      - has_position
+      - has_special_treatment
+  StirredTankReactor:
+    is_a: #todo Marc
+    class_uri:
+    description: "Stirred Tank Reactors (STRs) are frequently employed as versatile and controlled vessels, allowing for precise regulation of key parameters like temperature, pH, and stirring speed. All relevant specifications or attributes need to be described.Tubular flow/continuous reactor"
+    slots:
+      - has_type
+      - has_material
+      - has_volume
+      - has_volume_unit
+      - has_geometry
+      - has_bottom_type
+      - has_gas_consumption
+      - has_gas_supply
+      - has_gas_supply_rate
+      - has_gas_supply_rate_unit
+      - has_temperature_control
+      - has_special_treatment
+  TubularFlowContinuousReactor:
+    is_a: #todo Marc
+    class_uri:
+    description: "When conducting enzymatic reactions in tubular flow or continuous reactors, it is essential to provide detailed information about the reactor setup, e.g. plug flow reactor, and operating conditions to ensure reproducibility and transparency in reporting the experimental process."
+    slots:
+      - has_volume
+      - has_volume_unit
+      - has_geometry
+      - has_reactor_type
+      - has_material
+      - has_tubing
+      - has_localisation_of_the_catalyst
+      - has_special_treatment
+  Vial:
+    is_a: #todo Marc
+    class_uri: AFE:0000329
+    description: "Vials are sealable containers available in various sizes and materials, playing a crucial role in sample storage and handling, as well as serving as reaction vessels.Plate"
+    slots:
+      - has_vial_size
+      - has_vial_size_unit
+      - has_vial_material
+      - has_closure_type
+      - has_special_treatment
+slots:
+
+  # BiocatalystPurchased
+  has_name:
+    slot_uri: # todo Marc
+    description: "The name of the biocatalyst can be either generic based on the catalyzed reaction, for example, 'lipase' or more specifically by describing the genus and species, such as '"
+  has_ec_number:
+    slot_uri: # todo Marc
+    description: "Numerical classification system that categorizes enzymes based on their biochemical function and reaction mechanism, such as EC 3.1.4.12."
+  has_molecular_weight:
+    slot_uri: # todo Marc
+    description: "The molecular weight (MW) refer to the sum of the atomic weights of the atoms in a molecule and therefore describes the mass of an enzyme."
+    range: float
+  has_molecular_weight_unit:
+    slot_uri: # todo Marc
+    description: "The enzyme size or molar weight is typically expressed in kDa (kilodaltons)."
+  has_catalyzed_reaction:
+    slot_uri: # todo Marc
+    description: "The reaction catalyzed by the biocatalyst."
+  has_sequence_amino_acid:
+    slot_uri: # todo Marc
+    description: "The amino acid sequence of the biocatalyst. The amino acid sequence can be represented in either a three-letter or one-letter code. For instance, \"Ala-Ser-Gly\" corresponds to the three-letter code, while \"ASG\" represents the same sequence in the one-letter code. One of the databases commonly used for storing and retrieving amino acid sequences is the UniProt database (https://www.uniprot.org/). UniProt provides extensive information on protein sequences, including their one-letter and three-letter amino acid codes, allowing researchers to access and analyze various protein sequences."
+  has_sequence_DNA:
+    slot_uri: # todo Marc
+    description: "The DNA sequence of the biocatalyst including any tags and linkers."
+  has_origin_organism:
+    slot_uri: # todo Marc
+    description: "The specific species or source from which the enzyme is derived or isolated. It includes information about the genus and species of the organism. However, the cell type from which the biocatalyst is        derived could be bacterial, as well as plant, animal, or other sources. ("
+  has_supplier:
+    slot_uri: # todo Marc
+    description: "Information about the supplier from which the enzyme was purchased. If possible, a reference for the purchased biocatalyst should also be provided."
+  has_production_organism:
+    slot_uri: # todo Marc
+    description: "Information about the organism in which the biocatalyst was produced is crucial in the context of heterologous gene expression."
+  has_posttranslational_modification:
+    slot_uri: # todo Marc
+    description: "Information about any chemical modifications or alterations that occur to the biocatalyst's protein structure after translation, such as phosphorylation, glycosylation, acetylation,               methylation, ubiquitination and other modifications."
+  has_purity:
+    slot_uri: # todo Marc
+    description: "Purity of enzymes typically expressed in percentage (%). It is usually stated as the percentage of the pure enzyme or active component relative to the total mass of the enzyme preparation."
+    range: float
+  has_purity_specification:
+    slot_uri: # todo Marc
+    description: "Description of how the purity of the biocatalyst was determined. In case of purchased enzymes, this information is often available from the product specification sheet."
+  has_formulation:
+    slot_uri: # todo Marc
+    description: "Depending on the formulation, the biocatalyst can exist either in a dissolved state within a solvent or as a solid powder. It defines the physical state in which the biocatalyst is used. Additional information regarding the application or formulation in the experiment should be entered in the next subcategory."
+
+  # BiocatalystSelfProduced
+  has_sequence_plasmid:
+    slot_uri: # todo Marc
+    description: "The DNA sequence of the plasmid used to produce the biocatalyst. The sequence can be provided in plain text or as a database ID."
+  has_plasmid_specifications:
+    slot_uri: # todo Marc
+    description: "All DNA sequence changes (e.g. codon optimization for"
+  has_purification_method:
+    slot_uri: # todo Marc
+    description: "The choice of purification methods is diverse and can impact the enzyme, with possible methods including chromatographic techniques, precipitation, HPLC, ultrafiltration, dialysis, salt fractionation,      etc."
+
+  # CellFreeProduction
+  has_source_of_cellfree_extract:
+    slot_uri: # todo Marc
+    description: "Specifiy the organism or cell type from which the cell-free extract is derived (e.g., by describing the genus and species). These could be bacterial, plant, animal, or another sources. If available, reference can be made to an appropriate database entry."
+  has_concentration:
+    slot_uri: # todo Marc
+    description: "Concentration of the biocatalyst."
+    range: float
+  has_concentration_unit:
+    slot_uri: # todo Marc
+    description: "Concentration of the biocatalyst is typically expressed in g/L (grams per liter)."
+  has_concentration_determination_method:
+    slot_uri: # todo Marc
+    description: "It is important to specify the type of concentration determination. There are numerous methods available to determine protein content, yet only a few are suitable for estimating or determining the protein content of the target protein within a mixture. Some of these methods include activity assays or the Western blotting technique, which relies on prior SDS-PAGE and antibody binding for detection."
+
+  # CrudeCellExtract
+  has_cell_disruption_process:
+    slot_uri: # todo Marc
+    description: "Cell disruption processes and methods include various techniques such as mechanical disruption (e.g., grinding, homogenization, ultrasonication, french press), chemical disruption (e.g., detergents, enzymes), physical techniques (e.g., electroporation, high-pressure homogenization, thermal treatment) to break cell walls and release cell contents."
+
+  # Immobilised
+  has_biocatalyst:
+    slot_uri: # todo Marc
+    description: "When it comes to the immobilization method, it is also important to mention how the biocatalyst to be immobilized is present (for example, as a purified enzyme, or as a crude cell extract, etc.)."
+  has_immobilisation_chemistry:
+    slot_uri: # todo Marc
+    description: "This aspect denotes the specific chemical methods or techniques used to attach the enzymes onto the chosen base material. Different immobilization chemistries involve various covalent or non-covalent       bonding strategies, including crosslinking, adsorption, covalent bonding, encapsulation, specific binding via (affinity)tag, or entrapment."
+  has_carrier_material:
+    slot_uri: # todo Marc
+    description: "If a support material, base, or carrier was utilized, it is necessary to specify the material's name (e.g., gel, membrane, particle) along with the supplier and further product details ("
+  has_linkers:
+    slot_uri: # todo Marc
+    description: "Linkers are chemical compounds used to establish a connection or bridge between the enzymes and the carrier material. These linkers play a vital role in stabilizing the immobilized enzymes and can           influence the efficiency and functionality of the immobilization process. They facilitate binding between the enzymes and the carrier material, promoting a stable and active biocatalyst structure. Common and            widespread linkers are spacer molecules, crosslinkers, avidin-biotin or silane coupling agents. ("
+  has_immobilisation_method:
+    slot_uri: # todo Marc
+    description: "Specify further details regarding the immobilisation method of the enzyme. For a comprehensive report around the technical key data of the immobilization process or method, see literature for further              information, e.g. Ansorge-Schumacher2."
+
+  # PurifiedBiocatalyst
+  has_activity:
+    slot_uri: # todo Marc
+    description: "The activity of the biocatalyst can be expressed either as volumetric activity, which considers the total activity of the enzyme in the solution, or as specific activity, which takes into account the       enzyme's purity and indicates the activity of an enzyme per unit of enzyme protein or enzyme mass. If the biocatalyst has been purchased, it is advisable to look up more precise information (e.g. via an SOP)            regarding the activities specified by the manufacturer, as these may differ from the values determined by yourself (different activity assays can lead to different activity values). In addition, the loss of activity of the biocatalyst over the storage period should be taken into account."
+    range: float
+  has_activity_unit:
+    slot_uri: # todo Marc
+    description: "The enzyme's activity can be expressed either as specific activity [][][]"
+  has_activity_determination_method:
+    slot_uri: # todo Marc
+    description: "Enzyme activity can be measured in various ways, including spectrophotometrically, colorimetrically, fluorometrically, assays and using biosensors, etc."
+
+  # SecretedEnzyme
+  has_separation_method:
+    slot_uri: # todo Marc
+    description: "There are various methods to separate the supernatant from the cells, common methods include centrifugation, filtration, sedimentation, etc."
+
+  # StorageConditions
+  has_temperature:
+    slot_uri: # todo Marc
+    description: "The temperature at which the reactant is stored."
+    range: float
+  has_temperature_unit:
+    slot_uri: # todo Marc
+    description: "The temperature can be specified in units such as K, °C, or °F."
+  has_storage_start:
+    slot_uri: # todo Marc
+    description: "The date since the biocatalyst has been stored."
+  has_additives:
+    slot_uri: # todo Marc
+    description: "Additives for the storage of biocatalyst can include antioxidants, stabilizers, drying agent, or even inert gases (argon, nitrogen), among others."
+  has_drying_method:
+    slot_uri: # todo Marc
+    description: "For biocatalysts, various drying methods are employed (e.g., freeze-drying, also known as lyophilization, spray-drying, a method that involves atomizing a solution into small particles before drying, or vacuum drying, which removes moisture through low-pressure conditions). ("
+
+  # WholeCellBiocatalyst
+  has_harvesting_method:
+    slot_uri: # todo Marc
+    description: "In biotechnological processes, there are various methods for harvesting cells, including centrifugation, filtration, precipitation, etc."
+
+  # Components
+  has_smiles:
+    slot_uri: # todo Marc
+    description: "SMILES (Simplified Molecular Input Line Entry System) is a chemical notation used to represent and describe molecular structures in a simplified and human-readable format."
+  has_persistent_identifier_PID:
+    slot_uri: # todo Marc
+    description: "One or more identifiers that refer to the compound, such as CAS number, PubChem code, InChI code, etc."
+  has_solubility_limit:
+    slot_uri: # todo Marc
+    description: "This limit represents the maximum concentration of a component, which might include gases, that can dissolve in a solution or gas phase. ("
+    range: float
+  has_solubility_limit_unit:
+    slot_uri: # todo Marc
+    description: "The solubility limit of a component can be expressed in various units, including M (moles per liter), g/L (grams per liter), % (percentage concentration), or particles per volume, depending on the         type of component and the solvent used. ("
+
+  # Batch
+  has_reactor_type:
+    slot_uri: # todo Marc
+    description: ""
+
+  # DynamicTemperature_TFCR
+  has_temperature_beginning:
+    slot_uri: # todo Marc
+    description: "The initial temperature, prior to the start of the reaction, should be specified."
+    range: float
+  has_temperature_after_event:
+    slot_uri: # todo Marc
+    description: "The temperature that is present after a specific event has occurred."
+    range: float
+  has_event_description:
+    slot_uri: # todo Marc
+    description: "Information regarding the event that caused the temperature change. In the case of a fed-batch reaction protocol, this event can also be the planned adjustment of the temperature to another specific        value based on the current progress of the reaction process."
+  has_temperature_at_XY:
+    slot_uri: # todo Marc
+    description: "The temperature can also be measured at a variably chosen time point"
+    range: float
+  has_time_at_XY:
+    slot_uri: # todo Marc
+    description: "Specification of the exact time point"
+    range: float
+  has_time_unit:
+    slot_uri: # todo Marc
+    description: "Common units for specifying time can be s (seconds), min (minutes) h (hours)."
+  has_temperature_gradient_beginning:
+    slot_uri: # todo Marc
+    description: "The initial temperature from which the temperature gradient begins. ("
+    range: float
+  has_temperature_gradient_end:
+    slot_uri: # todo Marc
+    description: "The target temperature reached after the temperature gradient is applied. ("
+    range: float
+  has_gradient_length:
+    slot_uri: # todo Marc
+    description: "The distance or time span over which the temperature gradient is applied. ("
+    range: float
+  has_gradient_length_unit:
+    slot_uri: # todo Marc
+    description: "The gradient length can be specified either as the physical distance (e.g. in meters) or as the time span (e.g. in minutes). ("
+  has_measurement_points:
+    slot_uri: # todo Marc
+    description: "Information about the locations or time points where temperature measurements are taken to monitor the gradient. This can be important to ensure that the gradient behaves as intended.                       ("
+
+  # DynamicpH_TFCR
+  has_pH_beginning:
+    slot_uri: # todo Marc
+    description: "The initial pH, prior to the start of the reaction, should be specified."
+    range: float
+  has_pH_after_event:
+    slot_uri: # todo Marc
+    description: "The pH that is present after a specific event has occurred."
+    range: float
+  has_pH_at_XY:
+    slot_uri: # todo Marc
+    description: "The pH can also be measured at a variably chosen time point"
+    range: float
+  has_detected_when:
+    slot_uri: # todo Marc
+    description: "Specification whether all components of the reaction solution were already present or if some were added after the measurement at the timepoint of the pH measurement."
+  has_detected_how:
+    slot_uri: # todo Marc
+    description: "The pH value of a reaction can be determined in various ways, such as using a pH meter, pH paper, titration, electrochemical sensors, or other methods."
+  has_calibration_pH_electrode:
+    slot_uri: # todo Marc
+    description: "Usually, a pH electrode is calibrated using standard buffers at 20-25 °C. If the conditions in the reaction mixture differ from this, it should be specified. ("
+  has_pH_gradient_beginning:
+    slot_uri: # todo Marc
+    description: "The initial pH from which the pH gradient begins. ("
+    range: float
+  has_pH_gradient_end:
+    slot_uri: # todo Marc
+    description: "The target pH reached after the pH gradient is applied. ("
+    range: float
+
+  # GasPhase_TFCR
+  has_gas_type:
+    slot_uri: # todo Marc
+    description: "Information about the type of gas used, whether it's nitrogen dioxide, argon, oxygen or other gases."
+  has_gas_amount:
+    slot_uri: # todo Marc
+    description: "Concentration of the gas in the gas phase."
+    range: float
+  has_gas_unit:
+    slot_uri: # todo Marc
+    description: "In the case of gases, common units are volume percentage (Vol %), volume fraction (Vol/Vol), mole percentage (Mol %) or molar fraction (Mol/Mol)."
+
+  # LiquidPhase_TFCR
+  has_liquid_type:
+    slot_uri: # todo Marc
+    description: "Information about the type of liquid used, whether it is an organic solvent, an aqueous buffer or a mixture of both."
+  has_liquid_amount:
+    slot_uri: # todo Marc
+    description: "Amount of the liquid added to the reaction."
+    range: float
+  has_liquid_unit:
+    slot_uri: # todo Marc
+    description: "In case of aqueous liquids, mL (milliliter) is often used as unit, in case of organic solvents, volume percentage (Vol %) or volume fraction (Vol/Vol) is utilized."
+
+  # MonoliquidSystemDescription_TFCR
+  has_solvent_description:
+    slot_uri: # todo Marc
+    description: "The solvent used in the reaction system, e.g. a buffered aqueous solution or an organic solvent."
+  has_ionic_strength:
+    slot_uri: # todo Marc
+    description: "Ionic strength calculated according to the dissolved ions in the solvent. The following formula can be used: $$I = \\frac{1}{2} \\sum"
+    range: float
+  has_ionic_strength_unit:
+    slot_uri: # todo Marc
+    description: "The unit of ionic strength is usually expressed in mol/L (moles per liter), or in mmol/L (millimoles per liter). ("
+  has_further_additives:
+    slot_uri: # todo Marc
+    description: "Further additive like cosolvents used to increase solubility of reactants, e.g. DMSO."
+  has_Flow_rate:
+    slot_uri: # todo Marc
+    description: "The flow rate must be specified to determine how fast a liquid or gas is flowing through a reactor or system."
+    range: float
+  has_Flow_rate_unit:
+    slot_uri: # todo Marc
+    description: "Common units for describing flow rate include L/min (liters per minute), mL/h (milliliters per hour), m³/h (cubic meters per hour), or other volume units per unit of time."
+
+  # MultiphasicSystemDescription_TFCR
+  has_phases_number:
+    slot_uri: # todo Marc
+    description: "Number of phases present in the system, if there is an aqueous and a gas phase present, the number is 2."
+    range: float
+
+  # SolidPhase_TFCR
+  has_solid_type:
+    slot_uri: # todo Marc
+    description: "Information about the type of solid used, whether it is a support material, solid catalyst, or any other solid compound."
+  has_solid_amount:
+    slot_uri: # todo Marc
+    description: "Mass of the solid used in the reaction solution."
+    range: float
+  has_solid_unit:
+    slot_uri: # todo Marc
+    description: "In the case of solids, common units like grams, milligrams, or micrograms can be used."
+
+  # pHConstant_TFCR
+  has_pH_value:
+    slot_uri: # todo Marc
+    description: "The value of the pH."
+    range: float
+
+  # ActivityAndInitialReactionRate
+  has_specific_activity:
+    slot_uri: # todo Marc
+    description: "The specific activity refers to the amount of product formed or substrate consumed per unit of enzyme per unit of time."
+    range: float
+  has_specific_activity_unit:
+    slot_uri: # todo Marc
+    description: "The specific activity is typically expressed in µmol/min/mg (micromoles per minute per milligram of protein)."
+  has_initial_reaction_rate:
+    slot_uri: # todo Marc
+    description: "The initial reaction rate refers to the rate at which the product is formed in the first 10% of the enzymatic reaction under specific initial substrate concentrations and reaction conditions."
+    range: float
+  has_initial_reaction_rate_unit:
+    slot_uri: # todo Marc
+    description: "Typically, the initial reaction rate is expressed as mol/L/min (moles per liter per minute) or µmol/mL/min (micromoles per milliliter per minute)."
+
+  # KineticParameters
+  has_michaelis_constant:
+    slot_uri: # todo Marc
+    description: "The Michaelis-Menten constant (Km​) represents the substrate concentration at which an enzyme achieves half of its maximum reaction rate."
+    range: float
+  has_michaelis_constant_unit:
+    slot_uri: # todo Marc
+    description: "The unit of the Michaelis-Menten constant (Km​) is typically expressed as moles per liter (M or mM)."
+  has_maximum_reaction_rate:
+    slot_uri: # todo Marc
+    description: "Vmax, the maximum reaction rate, represents the speed at which an enzyme-catalyzed reaction reaches saturation, indicating the maximum achievable rate of product formation under optimal substrate concentration (where enzymes are predominantly saturated with substrates)."
+    range: float
+  has_maximum_reaction_rate_unit:
+    slot_uri: # todo Marc
+    description: "The unit of Vmax (maximum reaction rate) is typically represented as concentration per time, such as moles per liter per second (mol/L/s or mM/s)."
+  has_turnover_number:
+    slot_uri: # todo Marc
+    description: "The turnover number (kcat) measures the number of substrate molecules converted to product per active site of an enzyme per unit time when the enzyme is fully saturated with substrate."
+    range: float
+  has_turnover_number_unit:
+    slot_uri: # todo Marc
+    description: "The unit of turnover number (kcat) is typically expressed as moles of product per mole of enzyme per second or per minute (time-1)."
+  has_catalytic_efficiency:
+    slot_uri: # todo Marc
+    description: "Catalytic efficiency (kcat/Km) is a measure of how effectively an enzyme converts substrate into product, often quantified as the ratio of the turnover number (kcat) to the Michaelis-Menten constant (Km)."
+    range: float
+  has_catalytic_efficiency_unit:
+    slot_uri: # todo Marc
+    description: "The typical unit for catalytic efficiency (kcat/Km) is M-1s-1."
+  has_dissociation_constant:
+    slot_uri: # todo Marc
+    description: "The dissociation constant (Kd) is a measure that represents the equilibrium between a complex and its dissociated components."
+    range: float
+  has_dissociation_constant_unit:
+    slot_uri: # todo Marc
+    description: "The dissociation constant (Kd) is typically expressed in M (mol per liter) or its derivatives, such as nM (nanomoles per liter)."
+  has_inhibition_type:
+    slot_uri: # todo Marc
+    description: "Enzyme inhibition encompasses various forms, including competitive, non-competitive, uncompetitive, mixed, and irreversible inhibition. Each type has different effects on the enzyme's function and plays a crucial role in regulating biochemical processes."
+  has_inhibition_constant:
+    slot_uri: # todo Marc
+    description: "The inhibition constant (Ki) describes the affinity of an inhibitor for an enzyme. It indicates how effectively an inhibitor influences enzyme activity. A lower Ki value suggests a strong binding of the inhibitor to the enzyme."
+    range: float
+  has_inhibition_constant_unit:
+    slot_uri: # todo Marc
+    description: "The units for the inhibition constant (Ki) are commonly expressed in M (mol per liter) or related units."
+  has_hill_coefficient:
+    slot_uri: # todo Marc
+    description: "The Hill coefficient is a parameter used to describe cooperativity in the binding of molecules to proteins. It is employed in enzyme reactions, e.g. oxygen binding to hemoglobin, to indicate whether there is positive (cooperative) or negative (anticooperative) binding. A Hill coefficient greater than 1 indicates positive cooperativity, while a value less than 1 indicates negative cooperativity. A value of exactly 1 indicates no cooperativity."
+    range: float
+  has_enzyme_stability:
+    slot_uri: # todo Marc
+    description: "The stability of enzymes is often characterized by various parameters such as the enzyme's half-life under specific conditions, the decline in activity over time, or the preservation of catalytic activity under different environmental conditions."
+
+  # SelectivityAndSpecificity
+  has_stereoselectivity:
+    slot_uri: # todo Marc
+    description: "Stereoselectivity refers to the preference of a chemical reaction to produce a specific stereoisomer or a particular spatial arrangement of atoms within a molecule. It describes the ability of a reaction to favor the formation of one stereoisomer over others or to create a specific stereochemical outcome."
+  has_enantioselectivity:
+    slot_uri: # todo Marc
+    description: "Enantioselectivity, or enantiomeric ratio (E), defines the enzyme's capability to preferentially catalyze the transformation of one enantiomer over its mirror-image counterpart. This trait highlights the enzyme's ability to favor a specific enantiomer either as a product or as the preferred substrate for a reaction."
+    range: float
+  has_enantiomeric_excess:
+    slot_uri: # todo Marc
+    description: "The enantiomeric excess ("
+    range: float
+  has_enantiomeric_excess_unit:
+    slot_uri: # todo Marc
+    description: "The primary unit used for enantiomeric excess ("
+  has_diastereomeric_excess:
+    slot_uri: # todo Marc
+    description: "The diasteriomeric excess ("
+    range: float
+  has_diasteriomeric_excess_unit:
+    slot_uri: # todo Marc
+    description: "The primary unit used for diasteriomeric excess ("
+  has_isomeric_content:
+    slot_uri: # todo Marc
+    description: "The isomeric content ("
+    range: float
+  has_isomeric_content_unit:
+    slot_uri: # todo Marc
+    description: "The primary unit used for isomeric content ("
+  has_chemoselectivity:
+    slot_uri: # todo Marc
+    description: "Chemoselectivity refers to the ability of a chemical reaction to target a specific functional group or site within a molecule without affecting other reactive groups present. It highlights the preference of a reaction for one type of chemical bond or functional group over others in a molecule."
+  has_regioselectivity:
+    slot_uri: # todo Marc
+    description: "Regioselectivity refers to the preference of a reaction to occur at a specific site within a molecule or compound that has multiple potential reaction sites. It describes the tendency of a reaction to selectively take place at a particular position of the molecule, considering its structural arrangement of atoms or functional groups, rather than at other possible sites."
+
+  # ThermodynamicParameters
+  has_gibbs_free_energy_change:
+    slot_uri: # todo Marc
+    description: "The Gibbs free energy ("
+  has_enthalpy_change:
+    slot_uri: # todo Marc
+    description: "The enthalpy ("
+
+  # YieldAndConversion
+  has_c_yield:
+    slot_uri: # todo Marc
+    description: "Yield represents the amount of the desired product obtained from a reaction. It is the number of synthesized molecules of product per number of starting molecules. The following formula can be used:"
+    range: float
+  has_yield_unit:
+    slot_uri: # todo Marc
+    description: "The yield is typically expressed in percentages (%), reflecting the ratio of the actual obtained product quantity to the theoretical maximum product quantity that could be obtained under ideal conditions."
+  has_space_time_yield:
+    slot_uri: # todo Marc
+    description: "Space-time yield in biocatalysis refers to the mass of product obtained per unit volume of the reactor per unit time. Other terms commonly used in the literature are"
+    range: float
+  has_space_time_yield_unit:
+    slot_uri: # todo Marc
+    description: "Space-time yield is commonly expressed in g/L/h (grams per liter per hour) or mol/L/h (moles per liter per hour)."
+  has_conversion:
+    slot_uri: # todo Marc
+    description: "The term \"conversion\" refers to the percentage of substrate that undergoes transformation into the desired product during a reaction. It is the number of converted molecules per number of starting molecules. The following formula can be used:"
+    range: float
+  has_conversion_unit:
+    slot_uri: # todo Marc
+    description: "The conversion is commonly expressed as a percentage (%) to indicate the proportion of substrate converted to the desired product during a specific reaction."
+
+  # SamplePreprocessing
+  has_quenching_method:
+    slot_uri: # todo Marc
+    description: "Techniques or methods used to halt the reaction, including the chemicals or procedures employed (e.g., heat treatment). Accurate documentation of quenching methods in enzymatic reactions is vital as        these methods can significantly impact subsequent analytical procedures. For instance, opting for an organic solvent as a quenching reagent can notably enhance the solubility of substrates or products, directly         influencing downstream analyses."
+  has_quenching_ratio:
+    slot_uri: # todo Marc
+    description: "Information about the precise ratio or volume of the quenching solution in relation to the reaction mixture. ("
+  has_treatment_procedure:
+    slot_uri: # todo Marc
+    description: "Any further details regarding the sample processing steps that were carried out after it was collected from the reaction vessel (e.g., filtering samples)."
+
+  # SamplingDescription
+  has_volume_per_sample:
+    slot_uri: # todo Marc
+    description: "Volume of the collected sample."
+    range: float
+  has_volume_per_sample_unit:
+    slot_uri: # todo Marc
+    description: "Common units include mL (milliliters), μl (microliters), g (grams), or other volume units, depending on whether the samples are liquid or solid."
+  has_mixing_during_sampling:
+    slot_uri: # todo Marc
+    description: "Provide information about whether the reaction was mixed during sampling, as this can affect the representativeness of the collected sample."
+  has_vessel_opened_for_sampling:
+    slot_uri: # todo Marc
+    description: "Information about whether the reaction vessel was opened for sampling or not."
+  has_gas_phase:
+    slot_uri: # todo Marc
+    description: "Information about the composition of the gas phase above the reaction solution, including gases such as nitrogen, carbon dioxide, argon, oxygen or other gases."
+  has_time:
+    slot_uri: # todo Marc
+    description: "The time at which the sample was taken."
+    range: float
+
+  # SamplingFromHeterogeneousReactionSolutions
+  has_phase:
+    slot_uri: # todo Marc
+    description: "Information about which phase the sample was taken from must be provided."
+  has_biocatalyst_in_phase:
+    slot_uri: # todo Marc
+    description: "Information on whether the collected sample may be contaminated with the (bio)catalyst."
+
+  # LiquidOrGasImpelledMixing
+  has_volume_of_liquid_solid_phase:
+    slot_uri: # todo Marc
+    description: "In the context of enzymatic reactions or any chemical processes involving heterogeneous mixtures like a liquid and solid phase, essential parameters for describing the system involve the              composition of the phases, the percentage or fraction of the total volume occupied by the liquid-solid phase mixture, and further information."
+  has_residence_time:
+    slot_uri: # todo Marc
+    description: "The residence time, often denoted as \"τ\" (tau), refers to the average amount of time a substance or component spends inside a specific system or reactor and is to be specified."
+    range: float
+  has_residence_time_unit:
+    slot_uri: # todo Marc
+    description: "The units for residence time can vary depending on the system and the units used for volume and flow rate. Common units include s (seconds), min (minutes), h (hours), or any time-related units."
+  has_reynolds_number:
+    slot_uri: # todo Marc
+    description: "The Reynolds number (Re) is a dimensionless quantity used in fluid dynamics to predict the flow regime of a fluid within a specific system. It helps to determine whether the flow is laminar, turbulent, or     somewhere in between."
+  has_passive_mixing:
+    slot_uri: # todo Marc
+    description: "The design of the coils and the flow patterns created by the geometry of the tubing can lead to passive mixing as the fluid flows through the reactor without the need for external agitation. More           detailed information must be provided to describe the process."
+  has_active_T_or_Y_mixer:
+    slot_uri: # todo Marc
+    description: "Key features for describing an active Y or T mixer can include inlet ports, mixer chamber, outlet port, control, materials amon others."
+  has_pulsing:
+    slot_uri: # todo Marc
+    description: "The pulsing process involves periodically injecting or introducing specific components, such as reactants or additives, into a reaction system at regular intervals or in a pulsatile manner. More            detailed information must be provided to describe the process."
+
+  # MechanicallyImpelledMixing
+  has_stirring_type:
+    slot_uri: # todo Marc
+    description: "There are several types of stirring methods used in laboratory and industrial settings, including magnetic stirring (from vessel bottom), mechanical stirring, overhead stirring and other methods."
+  has_stirrer_material:
+    slot_uri: # todo Marc
+    description: "The specific composition or nature of the material should be indicated, e.g. whether it is made of magnetic material, a PTFE (polytetrafluoroethylene) coating, stainless steel or other relevant features that determine its structural or functional properties within the experimental setup."
+  has_number_of_stirrers:
+    slot_uri: # todo Marc
+    description: "The number of stirrers available in the system."
+    range: float
+  has_distance_between_stirrers:
+    slot_uri: # todo Marc
+    description: "Information about the distance, spacing or separation between the stirring rods or impellers within a reaction vessel or container."
+    range: float
+  has_distance_between_stirrers_unit:
+    slot_uri: # todo Marc
+    description: "The distance between stirrers can be specified in mm (millimeters), cm (centimeters), or m (meters), depending on the size and scale of the stirring system."
+  has_stirrer_blade_pitch_angle:
+    slot_uri: # todo Marc
+    description: "The pitch angle at which the blades or paddles of a stirring mechanism are positioned relative to the plane of rotation. It's typically expressed in ° (degrees)."
+    range: float
+  has_number_of_stirrer_blades:
+    slot_uri: # todo Marc
+    description: "The number of blades on each stirrer."
+    range: float
+  has_stirrer_blade_size:
+    slot_uri: # todo Marc
+    description: "The size of the impeller blades in a stirred tank reactor."
+    range: float
+  has_stirrer_blade_size_unit:
+    slot_uri: # todo Marc
+    description: "In the case of impellers in a stirred tank reactor, the diameter of the impeller blades is typically specified. This diameter can be measured in millimeters (mm) or centimeters (cm)."
+  has_stirrer_geometry:
+    slot_uri: # todo Marc
+    description: "There are various morphologies or geometries, such as radial impellers, axial impellers, helical ribbon impellers, paddle impellers, and more, depending on its design and intended purpose."
+  has_stirrer_speed:
+    slot_uri: # todo Marc
+    description: "Specify the speed or frequency at which the stirring was conducted."
+    range: float
+  has_speed_unit:
+    slot_uri: # todo Marc
+    description: "The unit for stirring speed can be expressed in RPM (revolutions per minute), Hz (Hertz), or rad/s (radians per second), depending on the measurement instruments and scientific conventions used."
+  has_height_of_stirrer_above_vessel_base:
+    slot_uri: # todo Marc
+    description: "The vertical distance between the bottom of the vessel or container (where the reaction takes place) and the lowest point of the stirring element or stirrer, which is usually located just above the         vessel base."
+    range: float
+  has_height_of_stirrer_above_vessel_base_unit:
+    slot_uri: # todo Marc
+    description: "Common units for defining the vertical distance between the bottom of the vessel and the lowest point of the stirrer include: mm (millimeters), cm (centimeters) and m (meters)."
+  has_power_per_volume:
+    slot_uri: # todo Marc
+    description: "The amount of stirring power or energy input into a system per unit volume."
+    range: float
+  has_power_per_volume_unit:
+    slot_uri: # todo Marc
+    description: "The units commonly used for expressing the stirring power are W/L (watts per liter) or kW/m³ (kilowatts per cubic meter)."
+  has_stir_bar_size:
+    slot_uri: # todo Marc
+    description: ""
+    range: float
+  has_stir_bar_size_unit:
+    slot_uri: # todo Marc
+    description: ""
+    range: float
+  has_stir_bar_shape:
+    slot_uri: # todo Marc
+    description: "The shape or configuration of the stir bar, whether it's cylindrical, octagonal, oval, or another shape. Different shapes can interact with the reaction mixture differently, influencing mixing patterns and efficiency."
+
+  # Plate
+  has_plate_type:
+    slot_uri: # todo Marc
+    description: "The type of plate, such as microtiter plate, deep-well plate, or others."
+  has_plate_material:
+    slot_uri: # todo Marc
+    description: "The material from which the plate is made, such as plastic (polystyrene), glass, or metal."
+  has_number_of_wells:
+    slot_uri: # todo Marc
+    description: "The total number of wells or cavities in the plate."
+  has_well_shape:
+    slot_uri: # todo Marc
+    description: ""
+  has_well_volume:
+    slot_uri: # todo Marc
+    description: "The volume of each well is, usually expressed in µL (microliters)."
+  has_well_arrangement:
+    slot_uri: # todo Marc
+    description: "The arrangement of the wells in the plate, for example, in rows and columns."
+  has_lot_number:
+    slot_uri: # todo Marc
+    description: "The lot number, also known as a batch number or code, is a unique identifier assigned to a specific batch of a product. This makes it possible to check or track information on production."
+    range: float
+  has_sealing_method:
+    slot_uri: # todo Marc
+    description: "Indicate if the wells were sealed with a sealing film or lid. ("
+  has_sealing_material:
+    slot_uri: # todo Marc
+    description: "The material of the sealing film or lid. ("
+
+  # Shaking
+  has_shaking_type:
+    slot_uri: # todo Marc
+    description: "The type of shaking used to mix the reaction (e.g., horizontal, vertical, back-and-forth or circulatory)."
+  has_deflection:
+    slot_uri: # todo Marc
+    description: "Information about the extent of deflection or bending of the agitator from its original position of the horizontal shaking system."
+    range: float
+  has_deflection_unit:
+    slot_uri: # todo Marc
+    description: "Units such as mm (millimeters) or μm (micrometers) could be used to describe deflection in relation to the movement of the shaking system."
+  has_speed:
+    slot_uri: # todo Marc
+    description: "Specify the speed or frequency at which the shaking was conducted."
+    range: float
+  has_position:
+    slot_uri: # todo Marc
+    description: "Information regarding the orientation of the vessel in the shaking system relative to deflection."
+
+  # StirredTankReactor
+  has_type:
+    slot_uri: # todo Marc
+    description: "There are several types of Stirred Tank Reactors, differing in design and intended use. A detailed description is required."
+  has_material:
+    slot_uri: # todo Marc
+    description: "Material the reactor is made of, e.g. glass, polypropylene etc."
+  has_volume:
+    slot_uri: # todo Marc
+    description: "Indicate the total volume capacity of the Stirred Tank Reactor."
+    range: float
+  has_volume_unit:
+    slot_uri: # todo Marc
+    description: "The volume is typically expressed in L (liters)."
+  has_geometry:
+    slot_uri: # todo Marc
+    description: "The geometry of the reactor, in particular of interest is the ratio of height to width."
+  has_bottom_type:
+    slot_uri: # todo Marc
+    description: "Shape of the bottom of the reactor, e.g. a round bottom or a flat bottom."
+  has_gas_consumption:
+    slot_uri: # todo Marc
+    description: "Common gases that are supplied to the reactor include, e.g., air, oxygen, hydrogen, etc."
+  has_gas_supply:
+    slot_uri: # todo Marc
+    description: "Gas can be supplied to a Stirred Tank Reactor in various ways, such as through sparging using a tube or an aeration basket, bubbling, or direct injection into the reactor vessel."
+  has_gas_supply_rate:
+    slot_uri: # todo Marc
+    description: "Specification of the gas supply rate."
+    range: float
+  has_gas_supply_rate_unit:
+    slot_uri: # todo Marc
+    description: "The units for the gas supply rate in a Stirred Tank Reactor can be L/min (liters per minute), m³/h (cubic meters per hour), or other volume units per unit of time."
+  has_temperature_control:
+    slot_uri: # todo Marc
+    description: "The temperature in a Stirred Tank Reactor can be controlled through various methods, typically using external heat sources or cooling systems such as heating jackets, cooling coils, or external             temperature control units."
+
+  # TubularFlowContinuousReactor
+  has_tubing:
+    slot_uri: # todo Marc
+    description: "When using tubing in a tubular flow/continuous reactor, various pieces of information can be provided, such as tubing material, diameter, length, connections, etc."
+  has_localisation_of_the_catalyst:
+    slot_uri: # todo Marc
+    description: "Specify the exact location of the catalyst in the tubular flow/continuous reactor. The biocatalyst is typically present in the liquid phase or immobilized on a support matrix (such as particles or          membranes)."
+
+  # Vial
+  has_vial_size:
+    slot_uri: # todo Marc
+    description: "The vial's size, which can be its volume or its dimensions."
+    range: float
+  has_vial_size_unit:
+    slot_uri: # todo Marc
+    description: "For describing the vial size, you can use mL (milliliters) as the unit when referring to volume or cm (centimeters) when referring to dimensions."
+  has_vial_material:
+    slot_uri: # todo Marc
+    description: "Specify the material of the vial, such as glass or plastic, as it can influence the reaction."
+  has_closure_type:
+    slot_uri: # todo Marc
+    description: "Indicate the type of closure or stopper used for the vial, as it affects sealing and the course of the reaction. If no closure or seal was used for the vial, this should be noted as well."
+  has_special_treatment:
+    slot_uri: # todo Marc
+    description: "If there are any other specific methods, procedures, characteristics or aspects related to the vial or its preparation for the reaction that are important for reproducibility and are not  described by the aforementioned metadata, they should be explained here."
+
 
 enums:
   
